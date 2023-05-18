@@ -1,0 +1,54 @@
+:root {
+  --primary-color: #82e3b4;
+  --primary-bg-color: #f5f5f5;
+}
+input {
+  outline: var(--primary-color);
+}
+.container {
+  margin: 0 auto;
+  width: 1000px;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+}
+header {
+  padding: 20px 100px;
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: relative;
+}
+#buscar{
+  width: 700px;
+  padding: 12px 15px;
+  background: var(--primary-bg-color);
+  border-radius: 13px;
+  outline: none;
+  border: 2px solid rgb(255, 255, 255);
+  position: relative;
+  transition: border 0.4s;
+}
+#buscar:hover {
+  border: 2px solid var(--primary-color);
+}
+#buscar:active {
+  border: 2px solid var(--primary-color);
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: 32px;
+  right: 110px;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  background-image: url('./assets/images/icon-search.svg');
+  background-size: cover;
+  z-index: 2000;
+}
