@@ -5,17 +5,16 @@
   --width: 1000px;
   --content-width: calc(var(--width) - 200px);
 }
+
 .content {
   width: var(--content-width);
 }
+
 * {
   padding: 0;
   margin: 0;
   text-decoration: none;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial;
-}
-input {
-  outline: var(--primary-color);
 }
 .container {
   margin: 0 auto;
@@ -31,10 +30,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   position: relative;
 }
-#buscar{
+
+#buscar {
   width: calc(var(--content-width) - 100px);
   padding: 12px 15px;
   background: var(--primary-bg-color);
@@ -44,12 +43,12 @@ header {
   position: relative;
   transition: border 0.4s;
 }
+
 #buscar:hover,
 #buscar:active,
-#buscar:focus   {
+#buscar:focus {
   border: 2px solid var(--primary-color);
 }
-
 
 header::before {
   content: "";
@@ -70,21 +69,22 @@ header::before {
   display: grid;
   grid-template-columns: 1fr;
 }
-.fonetica .result{
+
+.fonetica .result {
   font-size: 50px;
   text-transform: capitalize;
   margin: 0;
 }
+
 .fonetica span {
   font-size: 24px;
   color: var(--primary-color);
 }
-.classesDePalavras {
-  padding-bottom: 10px;
-}
+
 .significado {
   margin-top: 10px;
 }
+
 .caixa {
   position: relative;
   display: flex;
@@ -92,26 +92,31 @@ header::before {
   gap: 12px;
   padding-bottom: 30px;
 }
+
 .line {
   width: 100%;
   height: 2px;
   background: var(--primary-color);
   margin-top: 7px;
 }
+
 .exemplos h3 {
   color: var(--primary-color);
 }
+
 .exemplos ul {
   padding: 10px 0;
   list-style: none
 }
+
 .exemplos ul li {
   font-size: 16px;
-  color: var( --example-color);
+  color: var(--example-color);
   position: relative;
   margin-bottom: 8px;
   padding-left: 30px;
 }
+
 .exemplos ul li::before {
   content: "";
   position: absolute;
@@ -122,14 +127,17 @@ header::before {
   border-radius: 50%;
   background: var(--primary-color);
 }
+
 footer {
   color: var(--example-color);
   padding: 15px 0;
 }
-footer a{
+
+footer a {
   color: inherit;
 }
-.palavraNaoEncontrada {
+
+.palavraNaoEncontrada{
   font-size: 30px;
   font-weight: bold;
   display: flex;
@@ -137,24 +145,21 @@ footer a{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-@media (max-width: 1000px) {
-  :root {
-    --width: 800px;
   }
-}
-@media (max-width: 850px) {
+  
+  @media (max-width: 1000px) {
   :root {
-    --width: 600px;
-    --content-width: calc(var(--width) - 100px);
+  --width: 600px;
+  --content-width: calc(var(--width) - 100px);
   }
-}
-@media (max-width: 650px) {
+  }
+  
+  @media (max-width: 650px) {
   :root {
-    --width: 400px;
-    --content-width: calc(var(--width) - 100px);
+  --width: 400px;
+  --content-width: calc(var(--width) - 100px);
   }
   .palavraNaoEncontrada {
-    font-size: 20px;
+  font-size: 20px;
   }
-}
+  }
