@@ -1,6 +1,6 @@
-Apis: 
+API'S Utilizadas: 
 Dicionário
 https://dictionaryapi.dev/
 
-Tradução:
-https://mymemory.translated.net/doc/spec.php
+Cor:
+http://api.creativehandles.com/getRandomColor

@@ -3,7 +3,7 @@ let buscaPalavra = document.getElementById('buscar');
 let footer = document.querySelector('footer')
 const container = document.querySelector('.container')
 buscaPalavra.addEventListener('change', carregarDicionario)
-// console.log(palavraBuscada);
+const palavraNaoEncontrada = document.querySelector('.palavraNaoEncontrada')
 
 
 function renderizarSignificado(significados, div) {
@@ -31,18 +31,22 @@ function renderizarMain(palavra, fonetica, significados) {
   main.classList.add('content')
   main.innerHTML = `
   <div class="fonetica">
-    <h1 class="result">${palavra}</h1>
-    <span>${fonetica}</span>
+  <h1 class="result">${palavra}</h1>
+  <span>${fonetica}</span>
   </div>`
   const classesDePalavras = document.createElement('div')
   classesDePalavras.classList.add('classesDePalavras')
   renderizarSignificado(significados,classesDePalavras)
   main.append(classesDePalavras)
   main.innerHTML += `<div class="line"></div>`
-
+  
 }
-function renderizarFooter() {
-
+function renderizarFooter(linkDicionario) {
+  footer.classList.add('content')
+  footer.innerHTML = 
+  ` <footer class="content">
+  <a href="${linkDicionario}">${linkDicionario}</a>
+    </footer>`
 }
 async function carregarDicionario({ target }) {
   const word = target.value
@@ -59,8 +63,12 @@ async function carregarDicionario({ target }) {
       return { partOfSpeech, definitions }
     });
     renderizarMain(palavra, fonetica, significados)
-    // renderizarFooter()
-    // console.log(significados);
+    renderizarFooter(linkDicionario)
+    palavraNaoEncontrada.innerHTML = ""
+  } else {
+    main.innerHTML = ""
+    footer.innerHTML = ""
+    palavraNaoEncontrada.innerHTML = " <span>😕</span><div>Palavra Não Encontrada</div>"
   }
 }
 async function carregarCor() {
@@ -68,31 +76,7 @@ async function carregarCor() {
   const response = await fetch(url)
   const json = await response.json()
   const { color } = json
-  console.log(color);
+
   document.documentElement.style.setProperty('--primary-color', color)
 }
 carregarCor()
-
-// async function loadTranslation(texto) {
-//   // traduz de inglês para português
-//   linguagemNativa = 'en-US'
-//   linguagemTraducao = 'pt-BR'
-//   const maxCaracteresPermitidos = 500
-//   let traducao = ""
-//   if(texto.length > maxCaracteresPermitidos) {
-//     let contador = Math.ceil(texto.length / maxCaracteresPermitidos)
-//     for(let i = 0; i < contador; i++) {
-//       textoCortado = texto.slice(i * maxCaracteresPermitidos, (i + 1) * maxCaracteresPermitidos)
-//       traducao += textoCortado
-//       const response = await fetch(`https://api.mymemory.translated.net/get?q=${textoCortado}&langpair=${linguagemNativa}|${linguagemTraducao}`)
-//       const data = await response.json()
-//       traducao += data.responseData.translatedText
-//     }
-//   } else if (texto.length != 0) {
-//     const response = await fetch(`https://api.mymemory.translated.net/get?q=${texto}&langpair=${linguagemNativa}|${linguagemTraducao}`)
-//     const data = await response.json()
-//     traducao += data.responseData.translatedText
-//   }
-//   console.log("\n\n"+traducao);
-//   return traducao ? traducao : null
-// }
