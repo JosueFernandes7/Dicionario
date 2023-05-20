@@ -72,11 +72,11 @@ async function carregarDicionario({ target }) {
   }
 }
 async function carregarCor() {
-  const url = "http://api.creativehandles.com/getRandomColor"
+  const url = "https://www.thecolorapi.com/random"
   const response = await fetch(url)
   const json = await response.json()
-  const { color } = json
-
+  const { hex } = json
+  const color = hex.value
   document.documentElement.style.setProperty('--primary-color', color)
 }
 carregarCor()

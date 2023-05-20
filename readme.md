@@ -3,4 +3,4 @@ Dicionário
 https://dictionaryapi.dev/
 
 Cor:
-http://api.creativehandles.com/getRandomColor
+https://www.thecolorapi.com/random
