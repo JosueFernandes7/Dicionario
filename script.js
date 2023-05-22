@@ -57,9 +57,15 @@ async function carregarDicionario({ target }) {
   const word = target.value;
   target.value = '';
   const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
-  const response = await fetch(`${url}${word}`);
-  const json = await response.json();
-  let data = json[0];
+  let data = null
+  try {
+    const response = await fetch(`${url}${word}`);
+    if(!response.ok) throw new Error("Erro no fetch")
+    const json = await response.json();
+    data = json[0];
+  } catch(erro) {
+    console.log(erro.message);
+  }
   if (data) {
     const linkDicionario = data.sourceUrls[0];
     const fonetica = data.phonetic;
