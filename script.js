@@ -6,22 +6,22 @@ const palavraNaoEncontrada = document.querySelector('.palavraNaoEncontrada');
 
 buscaPalavra.addEventListener('change', carregarDicionario);
 
-function renderizarSignificado(significados, div) {
+async function renderizarSignificado(significados, div) {
   for (const { partOfSpeech, definitions } of significados) {
     const significado = document.createElement('div');
     significado.classList.add('significado');
     significado.innerHTML = `
       <div class="caixa">
-        <h2>${partOfSpeech}</h2>
+        <h2>${await loadTranslation(partOfSpeech) ?? partOfSpeech}</h2>
         <div class="line"></div>
       </div>
     `;
     const exemplos = document.createElement('div');
     const ul = document.createElement('ul');
     exemplos.classList.add('exemplos');
-    exemplos.innerHTML = `<h3>Meaning</h3>`;
+    exemplos.innerHTML = `<h3>Significados</h3>`;
     for (const { definition } of definitions) {
-      ul.innerHTML += `<li>${definition}</li>`;
+      ul.innerHTML += `<li>${await loadTranslation(definition) ?? definition}</li>`;
     }
     exemplos.append(ul);
     significado.append(exemplos);
@@ -29,17 +29,18 @@ function renderizarSignificado(significados, div) {
   }
 }
 
-function renderizarMain(palavra, fonetica, significados) {
+
+async function renderizarMain(palavra, fonetica, significados) {
   main.classList.add('content');
   main.innerHTML = `
     <div class="fonetica">
-      <h1 class="result">${palavra}</h1>
-      <span>${fonetica}</span>
+      <h1 class="result">${await loadTranslation(palavra) ?? palavra}</h1>
+      <span>${await loadTranslation(fonetica) ?? fonetica}</span>
     </div>
   `;
   const classesDePalavras = document.createElement('div');
   classesDePalavras.classList.add('classesDePalavras');
-  renderizarSignificado(significados, classesDePalavras);
+  await renderizarSignificado(significados, classesDePalavras);
   main.append(classesDePalavras);
   main.innerHTML += `<div class="line"></div>`;
 }
@@ -60,10 +61,10 @@ async function carregarDicionario({ target }) {
   let data = null
   try {
     const response = await fetch(`${url}${word}`);
-    if(!response.ok) throw new Error("Erro no fetch")
+    if (!response.ok) throw new Error("Erro no fetch")
     const json = await response.json();
     data = json[0];
-  } catch(erro) {
+  } catch (erro) {
     console.log(erro.message);
   }
   if (data) {
@@ -74,8 +75,9 @@ async function carregarDicionario({ target }) {
       partOfSpeech,
       definitions,
     }));
-    renderizarMain(palavra, fonetica, significados);
+    await renderizarMain(palavra, fonetica, significados);
     renderizarFooter(linkDicionario);
+
     palavraNaoEncontrada.innerHTML = '';
   } else {
     main.innerHTML = '';
@@ -97,3 +99,11 @@ async function carregarCor() {
 }
 
 window.addEventListener('load', carregarCor);
+
+// Não foi implementado.
+
+// async function loadTranslation(texto) {
+//   const response = await fetch(`https://api.mymemory.translated.net/get?q=${texto}&langpair=en-US|pt-BR`)
+//   const data = await response.json();
+//   return data.responseData.translatedText;
+// }
