@@ -102,8 +102,8 @@ window.addEventListener('load', carregarCor);
 
 // Não foi implementado.
 
-// async function loadTranslation(texto) {
-//   const response = await fetch(`https://api.mymemory.translated.net/get?q=${texto}&langpair=en-US|pt-BR`)
-//   const data = await response.json();
-//   return data.responseData.translatedText;
-// }
+async function loadTranslation(texto) {
+  // const response = await fetch(`https://api.mymemory.translated.net/get?q=${texto}&langpair=en-US|pt-BR`)
+  // const data = await response.json();
+  // return data.responseData.translatedText;
+}
