@@ -19,7 +19,7 @@ async function renderizarSignificado(significados, div) {
     const exemplos = document.createElement('div');
     const ul = document.createElement('ul');
     exemplos.classList.add('exemplos');
-    exemplos.innerHTML = `<h3>Significados</h3>`;
+    exemplos.innerHTML = `<h3>${await loadTranslation("Meaning") ?? "Meaning"}</h3>`;
     for (const { definition } of definitions) {
       ul.innerHTML += `<li>${await loadTranslation(definition) ?? definition}</li>`;
     }
